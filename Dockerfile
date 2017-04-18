@@ -19,19 +19,13 @@ RUN \
   pip install setuptools && \
   apt-get -y install git && \
   git clone https://github.com/omererdem/honeything.git && \
+  rm honeything/src/config/config.ini
+
+ADD config.ini honeything/src/config/  
+RUN \
   cd honeything && \
   python setup.py install 
 
-# Add files.
-#ADD root/.bashrc /root/.bashrc
-#ADD root/.gitconfig /root/.gitconfig
-#ADD root/.scripts /root/.scripts
-
-# Set environment variables.
-#ENV HOME /root
-
-# Define working directory.
-#WORKDIR /root
 ADD startup.sh /
 ENTRYPOINT ["/bin/bash"]
 # Define default command.
